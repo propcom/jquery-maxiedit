@@ -81,7 +81,7 @@
 		// Create all the elements
 		var $overlay = $('<div/>').addClass('js-maxiedit-overlay').hide(),
 			$done    = $('<button/>').addClass('js-maxiedit-done btn btn-primary').text('Done (or Ctrl+Enter)').on('click', function(e){e.preventDefault();$('.js-maxiedit-overlay').hide();}),
-			$cancel  = $('<button/>').addClass('js-maxiedit-cancel btn btn-secondary').text('Cancel').on('click', function(e){e.preventDefault();$('.js-maxiedit-overlay').hide();}),
+			$cancel  = $('<button/>').addClass('js-maxiedit-cancel btn btn-danger').text('Cancel').on('click', function(e){e.preventDefault();$('.js-maxiedit-overlay').hide();}),
 			$edit;
 
 		// Use ACE editor if it exists
