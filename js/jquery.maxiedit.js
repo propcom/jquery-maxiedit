@@ -1,6 +1,7 @@
 (function($) {
 
 	var aceEdit;
+	var $activeElem;
 
 	$.fn.maxiEdit = function(options) {
 
@@ -26,6 +27,8 @@
 			.on('click', function(e){
 				e.preventDefault();
 
+				$activeElem = $elem;
+
 				if (aceEdit) {
 					aceEdit.setValue($elem.val());
 					aceEdit.focus();
@@ -33,16 +36,6 @@
 					$('.js-maxiedit-edit').val($elem.val());
 					$('.js-maxiedit-edit').focus();
 				}
-
-				$('.js-maxiedit-done').one('click', function(e) {
-					e.preventDefault();
-
-					if (aceEdit) {
-						$elem.val(aceEdit.getValue());
-					} else {
-						$elem.val($('.js-maxiedit-edit').val());
-					}
-				});
 
 				$('.js-maxiedit-overlay').show();
 				$button.hide();
@@ -83,6 +76,17 @@
 			$done    = $('<button/>').addClass('js-maxiedit-done btn btn-primary').text('Done (or Ctrl+Enter)').on('click', function(e){e.preventDefault();$('.js-maxiedit-overlay').hide();}),
 			$cancel  = $('<button/>').addClass('js-maxiedit-cancel btn btn-danger').text('Cancel').on('click', function(e){e.preventDefault();$('.js-maxiedit-overlay').hide();}),
 			$edit;
+
+		// Hook done button
+		$done.click(function(e) {
+			e.preventDefault();
+
+			if (aceEdit) {
+				$activeElem.val(aceEdit.getValue());
+			} else {
+				$activeElem.val($('.js-maxiedit-edit').val());
+			}
+		});
 
 		// Use ACE editor if it exists
 		if (window.ace) {
